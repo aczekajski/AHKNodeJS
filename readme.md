@@ -403,13 +403,18 @@ Sends the provided _string_ possibly wrapped in an _object_.
 ```js
 await ahk.send({
   msg: string,
-  blind?: boolean
-} | msg);
+  blind?: boolean,
+  raw?: boolean
+} | string);
 ```
 
 **msg** - The message to send
 
 **blind** - Whether or not [blind mode](https://www.autohotkey.com/docs/commands/Send.htm#Blind) will be used
+
+**raw** - Whether or not [raw mode](https://www.autohotkey.com/docs/commands/Send.htm#Raw) will be used
+
+> Note: the message string provided is not intepreted as part of the ahk script so escape sequences (``n` etc), variable references and expressions are not interpreted in any mode
 
 ---
 
@@ -420,13 +425,18 @@ Sends the provided _string_ using [sendInput](https://www.autohotkey.com/docs/co
 ```js
 await ahk.sendInput({
   msg: string,
-  blind?: boolean
-} | msg);
+  blind?: boolean,
+  raw?: boolean
+} | string);
 ```
 
 **msg** - The message to send
 
 **blind** - Whether or not [blind mode](https://www.autohotkey.com/docs/commands/Send.htm#Blind) will be used
+
+**raw** - Whether or not [raw mode](https://www.autohotkey.com/docs/commands/Send.htm#Raw) will be used
+
+> Note: the message string provided is not intepreted as part of the ahk script so escape sequences (``n` etc), variable references and expressions are not interpreted in any mode
 
 ---
 
@@ -437,13 +447,18 @@ Sends the provided _string_ using [sendPlay](https://www.autohotkey.com/docs/com
 ```js
 await ahk.sendPlay({
   msg: string,
-  blind?: boolean
-} | msg);
+  blind?: boolean,
+  raw?: boolean
+} | string);
 ```
 
 **msg** - The message to send
 
 **blind** - Whether or not [blind mode](https://www.autohotkey.com/docs/commands/Send.htm#Blind) will be used
+
+**raw** - Whether or not [raw mode](https://www.autohotkey.com/docs/commands/Send.htm#Raw) will be used
+
+> Note: the message string provided is not intepreted as part of the ahk script so escape sequences (``n` etc), variable references and expressions are not interpreted in any mode
 
 ---
 
