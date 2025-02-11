@@ -6,21 +6,21 @@ const fs = require('fs/promises');
  * @module ahknodejs
  * @param {string} path - The path to AutoHotKey.exe
  * @param {[
- *  {key: string,
+ *  {
+ *   key: string,
  *   modifiers?: [
  *    string
  *   ],
  *   noInterrupt?: boolean
- *  }?,
- *  {
+ *  } | {
  *   keys: [string],
  *   noInterrupt?: boolean
- *  }?
- * ]?} hotkeysList - A list of to-be-used hotkeys
+ *  } | string
+ * ]} hotkeysList - A list of to-be-used hotkeys
  * @param {{
  *  defaultColorVariation?: number
  *  ahkV1?: boolean
- * }} options - The options to initiate AHK NodeJS with
+ * }} [options] - The options to initiate AHK NodeJS with
  * @returns An object containing this package's functions
  */
 module.exports = async function (path, hotkeysList, options) {
