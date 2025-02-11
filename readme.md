@@ -414,7 +414,7 @@ await ahk.send({
 
 **raw** - Whether or not [raw mode](https://www.autohotkey.com/docs/commands/Send.htm#Raw) will be used
 
-> Note: the message string provided is not intepreted as part of the ahk script so escape sequences (``n` etc), variable references and expressions are not interpreted in any mode
+> Note: the message string provided is not intepreted as part of the ahk script so [escape sequences](https://www.autohotkey.com/docs/misc/EscapeChar.htm) (``n` etc), [variable references](https://www.autohotkey.com/docs/Variables.htm#retrieving) and [expressions](https://www.autohotkey.com/docs/Variables.htm#Expressions) are not interpreted in any mode
 
 ---
 
@@ -436,7 +436,7 @@ await ahk.sendInput({
 
 **raw** - Whether or not [raw mode](https://www.autohotkey.com/docs/commands/Send.htm#Raw) will be used
 
-> Note: the message string provided is not intepreted as part of the ahk script so escape sequences (``n` etc), variable references and expressions are not interpreted in any mode
+> Note: the message string provided is not intepreted as part of the ahk script so [escape sequences](https://www.autohotkey.com/docs/misc/EscapeChar.htm) (``n` etc), [variable references](https://www.autohotkey.com/docs/Variables.htm#retrieving) and [expressions](https://www.autohotkey.com/docs/Variables.htm#Expressions) are not interpreted in any mode
 
 ---
 
@@ -458,7 +458,7 @@ await ahk.sendPlay({
 
 **raw** - Whether or not [raw mode](https://www.autohotkey.com/docs/commands/Send.htm#Raw) will be used
 
-> Note: the message string provided is not intepreted as part of the ahk script so escape sequences (``n` etc), variable references and expressions are not interpreted in any mode
+> Note: the message string provided is not intepreted as part of the ahk script so [escape sequences](https://www.autohotkey.com/docs/misc/EscapeChar.htm) (``n` etc), [variable references](https://www.autohotkey.com/docs/Variables.htm#retrieving) and [expressions](https://www.autohotkey.com/docs/Variables.htm#Expressions) are not interpreted in any mode
 
 ---
 
