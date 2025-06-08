@@ -6,21 +6,21 @@ const fs = require('fs/promises');
  * @module ahknodejs
  * @param {string} path - The path to AutoHotKey.exe
  * @param {[
- *  {key: string,
+ *  {
+ *   key: string,
  *   modifiers?: [
  *    string
  *   ],
  *   noInterrupt?: boolean
- *  }?,
- *  {
+ *  } | {
  *   keys: [string],
  *   noInterrupt?: boolean
- *  }?
- * ]?} hotkeysList - A list of to-be-used hotkeys
+ *  } | string
+ * ]} hotkeysList - A list of to-be-used hotkeys
  * @param {{
  *  defaultColorVariation?: number
  *  ahkV1?: boolean
- * }} options - The options to initiate AHK NodeJS with
+ * }} [options] - The options to initiate AHK NodeJS with
  * @returns An object containing this package's functions
  */
 module.exports = async function (path, hotkeysList, options) {
@@ -367,40 +367,44 @@ module.exports = async function (path, hotkeysList, options) {
     /**
      * Types out a string. Look at documentation for extra information.
      * @param {'send' | 'sendInput' | 'sendPlay'} sendType - type of "send" command
-     * @param {{ msg: string, blind?: boolean } | string} x - The string to send
+     * @param {{ msg: string, blind?: boolean, raw?: boolean} | string} x - The string to send
      */
     async sendGeneric(sendType, x) {
       if (typeof x === 'string') x = { msg: x };
-      let toSend = '';
-      if (x.blind) toSend += '{Blind}';
-      toSend += x.msg
-        .replace(/!/g, '{!}')
-        .replace(/#/g, '{#}')
-        .replace(/\+/g, '{+}')
-        .replace(/\^/g, '{^}')
-        .replace(/\\{/g, '{{}')
-        .replace(/\\}/g, '{}}')
-        .replace(/\n/g, '{enter}');
-      runner.stdin.write(formatCmd(sendType, toSend));
+      let subcommands = x.raw
+        ? x.msg.split('\n')
+        : [x.msg.replace(/\n/g, '{enter}')];
+      subcommands = subcommands.map((msg, i) => {
+        let prefix = '';
+        if (x.blind) { prefix += '{Blind}'; }
+        if (x.raw) {
+          if (i > 0) {
+            prefix += '{enter}';
+          }
+          prefix += '{Raw}';
+        }
+        return formatCmd(sendType, prefix + msg);
+      });
+      runner.stdin.write(subcommands.join(''));
       await wait();
     },
     /**
      * Types out a string. Look at documentation for extra information.
-     * @param {{ msg: string, blind?: boolean } | string} x - The string to send
+     * @param {{ msg: string, blind?: boolean, raw?: boolean} | string} x - The string to send
      */
     async send(x) {
       return ahk.sendGeneric('send', x);
     },
     /**
      * Types out a string using SendInput. Look at documentation for extra information.
-     * @param {{ msg: string, blind?: boolean } | string} x - The string to send
+     * @param {{ msg: string, blind?: boolean, raw?: boolean} | string} x - The string to send
      */
     async sendInput(x) {
       return ahk.sendGeneric('sendInput', x);
     },
     /**
      * Types out a string using SendPlay. Look at documentation for extra information.
-     * @param {{ msg: string, blind?: boolean } | string} x - The string to send
+     * @param {{ msg: string, blind?: boolean, raw?: boolean} | string} x - The string to send
      */
     async sendPlay(x) {
       return ahk.sendGeneric('sendPlay', x);
