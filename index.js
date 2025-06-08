@@ -229,6 +229,17 @@ module.exports = async function (path, hotkeysList, options) {
       }
     },
     /**
+     * Invokes Ctrl+C and returns the new contents of the clipboard.
+     * Manually sending ^c and then reading clipboard usually returns stale data.
+     * This function allows to reliably wait for the clipboard to get populated without adding an arbitrary wait between them.
+     * 
+     * @returns {Promise<string>} Content of what was copied
+     */
+    async copyAndGetClipboard() {
+      runner.stdin.write(formatCmd('copyAndGetClipboard'));
+      return await wait();
+    },
+    /**
      * Searches for a pixel of set color
      * @param {{
      *  x1: number,

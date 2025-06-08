@@ -49,6 +49,11 @@ Loop{
   } else if (data[1] = "clickPlay") {
     SendPlay("{{}Click " data[2] "{}}")
     write("done")
+  } else if (data[1] = "copyAndGetClipboard") {
+    A_Clipboard := ""
+    Send "^c"
+    ClipWait(1)
+    write(A_Clipboard)
   } else if (data[1] = "getClipboard") {
     write(A_Clipboard)
   } else if (data[1] = "setClipboard") {
