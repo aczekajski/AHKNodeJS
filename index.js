@@ -5,7 +5,7 @@ const fs = require('fs/promises');
  * Initiates AHK NodeJS with the following parameters
  * @module ahknodejs
  * @param {string} path - The path to AutoHotKey.exe
- * @param {[
+ * @param {(
  *  {
  *   key: string,
  *   modifiers?: [
@@ -16,7 +16,7 @@ const fs = require('fs/promises');
  *   keys: [string],
  *   noInterrupt?: boolean
  *  } | string
- * ]} hotkeysList - A list of to-be-used hotkeys
+ * )[]} [hotkeysList] - A list of to-be-used hotkeys
  * @param {{
  *  defaultColorVariation?: number
  *  ahkV1?: boolean
@@ -476,7 +476,9 @@ write(x) {
   await fs.writeFile(__dirname + '\\hotkeys.ahk', hotkeysString);
   const hotkeys = spawn(path, [__dirname + '\\hotkeys.ahk']);
   runner.stdout.on('end', process.exit);
-  hotkeys.stdout.on('end', process.exit);
+  if (hotkeysList.length) {
+    hotkeys.stdout.on('end', process.exit);
+  }
   process.on('SIGINT', process.exit);
   process.on('exit', function () {
     if (!runner.killed) runner.kill();
